@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{5D81674A-CA9D-4A54-BB07-FD3EB52003A7}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="LogOnator.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="LogGenerator.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="LogOnator">
+        <MSBuild Projects="LogOnator.dproj"/>
+    </Target>
+    <Target Name="LogOnator:Clean">
+        <MSBuild Projects="LogOnator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LogOnator:Make">
+        <MSBuild Projects="LogOnator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LogGenerator">
+        <MSBuild Projects="LogGenerator.dproj"/>
+    </Target>
+    <Target Name="LogGenerator:Clean">
+        <MSBuild Projects="LogGenerator.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LogGenerator:Make">
+        <MSBuild Projects="LogGenerator.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="LogOnator;LogGenerator"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="LogOnator:Clean;LogGenerator:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="LogOnator:Make;LogGenerator:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
